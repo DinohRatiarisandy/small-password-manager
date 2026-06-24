@@ -7,6 +7,23 @@
 import { BaseModel, column } from '@adonisjs/lucid/orm'
 import { DateTime } from 'luxon'
 
+export class OrganisationMemberSchema extends BaseModel {
+  static $columns = ['createdAt', 'id', 'organisationId', 'role', 'updatedAt', 'userId'] as const
+  $columns = OrganisationMemberSchema.$columns
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime | null
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare organisationId: number
+  @column()
+  declare role: string
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+  @column()
+  declare userId: number
+}
+
 export class OrganisationSchema extends BaseModel {
   static $columns = ['createdAt', 'id', 'name', 'ownerId', 'slug', 'updatedAt'] as const
   $columns = OrganisationSchema.$columns
