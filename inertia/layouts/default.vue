@@ -5,6 +5,7 @@ import { toast, Toaster } from 'vue-sonner'
 import type { Data } from '@generated/data'
 import { Link, Form } from '@adonisjs/inertia/vue'
 import ThemeSwitcher from '~/components/ThemeSwitcher.vue'
+import Avatar from '~/components/Avatar.vue'
 
 const page = usePage<Data.SharedProps>()
 
@@ -28,10 +29,10 @@ watch(
 </script>
 
 <template>
-  <header>
-    <div>
-      <div>
-        <Link route="home">
+  <header class="sticky top-0 z-50 border-b bg-base-100/80 backdrop-blur p-2">
+    <div class="flex justify-between">
+      <div class="flex items-center gap-4">
+        <Link route="home" class="flex items-center">
           <svg
             width="66"
             height="24"
@@ -57,12 +58,18 @@ watch(
         <ThemeSwitcher />
       </div>
       <div>
-        <nav>
+        <nav class="flex items-center gap-3">
           <template v-if="page.props.user">
-            <span>{{ page.props.user.initials }}</span>
-            <Form route="session.destroy">
-              <button class="btn btn-soft" type="submit">Logout</button>
-            </Form>
+            <div class="flex items-center gap-2">
+              <Avatar
+                :initials="page.props.user.initials"
+                :dataTip="page.props.user.email"
+                tooltipPosition="left"
+              />
+              <Form route="session.destroy">
+                <button class="btn btn-warning" type="submit">Logout</button>
+              </Form>
+            </div>
           </template>
           <template v-else>
             <Link class="link link-secondary" route="new_account.create">Signup</Link>
@@ -73,7 +80,7 @@ watch(
     </div>
   </header>
 
-  <main>
+  <main class="mx-auto w-full max-w-6xl px-4 py-6">
     <slot />
   </main>
 
