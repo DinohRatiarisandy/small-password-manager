@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { Form } from '@adonisjs/inertia/vue'
+import PasswordInput from '~/components/PasswordInput.vue'
+import EmailInput from '~/components/EmailInput.vue'
 </script>
 
 <template>
@@ -12,31 +14,22 @@ import { Form } from '@adonisjs/inertia/vue'
     <div>
       <Form v-slot="{ processing, errors }" route="session.store">
         <div>
-          <label for="email">Email</label>
-          <input
-            id="email"
-            type="email"
-            name="email"
-            autocomplete="username"
-            :data-invalid="errors.email ? 'true' : undefined"
-          />
-          <div v-if="errors.email">{{ errors.email }}</div>
+          <EmailInput name="email" :error="errors.email" />
         </div>
 
         <div>
-          <label for="password">Password</label>
-          <input
+          <PasswordInput
             id="password"
             type="password"
             name="password"
-            autocomplete="current-password"
-            :data-invalid="errors.password ? 'true' : undefined"
+            autocomplete="password"
+            placeholder="Password"
+            :error="errors.password"
           />
-          <div v-if="errors.password">{{ errors.password }}</div>
         </div>
 
         <div>
-          <button type="submit" class="button" :disabled="processing">Login</button>
+          <button type="submit" class="btn btn-primary" :disabled="processing">Login</button>
         </div>
       </Form>
     </div>
