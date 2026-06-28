@@ -26,5 +26,7 @@ router
 router
   .group(() => {
     router.post('logout', [controllers.Session, 'destroy'])
+
+    router.get('/organisations', [controllers.Organisations, 'index'])
   })
   .use(middleware.auth())
