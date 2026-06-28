@@ -1,5 +1,6 @@
 import type { HttpContext } from '@adonisjs/core/http'
 import Organisation from '#models/organisation'
+import SlugService from '#services/slug_service'
 
 export default class OrganisationsController {
   /**
@@ -9,5 +10,19 @@ export default class OrganisationsController {
     const organisations = await Organisation.query().where('ownerId', auth.user!.id)
 
     return inertia.render('organisation/index', { organisations })
+  }
+
+  async store({ request, auth, response }: HttpContext) {
+    const data = request.only(['name'])
+
+    const slug = await SlugService.slugify(data.name)
+
+    await Organisation.create({
+      name: data.name,
+      slug,
+      ownerId: auth.user!.id,
+    })
+
+    return response.redirect().back()
   }
 }
