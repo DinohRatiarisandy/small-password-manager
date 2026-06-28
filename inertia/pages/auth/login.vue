@@ -20,7 +20,6 @@ import EmailInput from '~/components/EmailInput.vue'
         <div>
           <PasswordInput
             id="password"
-            type="password"
             name="password"
             autocomplete="password"
             placeholder="Password"

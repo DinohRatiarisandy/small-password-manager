@@ -25,7 +25,6 @@ import FullNameInput from '~/components/FullNameInput.vue'
         <div>
           <PasswordInput
             id="password"
-            type="password"
             name="password"
             autocomplete="new-password"
             placeholder="Password"
@@ -36,7 +35,6 @@ import FullNameInput from '~/components/FullNameInput.vue'
         <div>
           <PasswordInput
             id="passwordConfirmation"
-            type="password"
             name="passwordConfirmation"
             autocomplete="new-password"
             placeholder="Confirm password "
