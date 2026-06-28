@@ -91,4 +91,16 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/organisations_controller').default['index']>>>
     }
   }
+  'organisations.store': {
+    methods: ["POST"]
+    pattern: '/organisations'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/organisations_controller').default['store']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/organisations_controller').default['store']>>>
+    }
+  }
 }

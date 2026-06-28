@@ -14,5 +14,6 @@ export interface ApiDefinition {
   }
   organisations: {
     index: typeof routes['organisations.index']
+    store: typeof routes['organisations.store']
   }
 }
