@@ -28,5 +28,6 @@ router
     router.post('logout', [controllers.Session, 'destroy'])
 
     router.get('/organisations', [controllers.Organisations, 'index'])
+    router.post('/organisations', [controllers.Organisations, 'store'])
   })
   .use(middleware.auth())
