@@ -11,10 +11,12 @@ const props = defineProps<{
 <template>
   <div
     :class="
-      cn(
-        'tooltip avatar avatar-placeholder',
-        props.tooltipPosition && `md:tooltip-${props.tooltipPosition} md:tooltip-center`
-      )
+      cn('avatar avatar-placeholder', props.dataTip && 'tooltip tooltip-info', {
+        'tooltip-top': props.tooltipPosition === 'top',
+        'tooltip-bottom': props.tooltipPosition === 'bottom',
+        'tooltip-left': props.tooltipPosition === 'left',
+        'tooltip-right': props.tooltipPosition === 'right',
+      })
     "
     :data-tip="props.dataTip"
   >
