@@ -1,6 +1,7 @@
 import type { HttpContext } from '@adonisjs/core/http'
 import Organisation from '#models/organisation'
 import SlugService from '#services/slug_service'
+import { createOrganisationValidator } from '#validators/create_organisation'
 
 export default class OrganisationsController {
   /**
@@ -13,7 +14,7 @@ export default class OrganisationsController {
   }
 
   async store({ request, auth, response }: HttpContext) {
-    const data = request.only(['name'])
+    const data = await request.validateUsing(createOrganisationValidator)
 
     const slug = await SlugService.slugify(data.name)
 

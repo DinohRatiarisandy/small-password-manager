@@ -95,12 +95,12 @@ export interface Registry {
     methods: ["POST"]
     pattern: '/organisations'
     types: {
-      body: {}
+      body: ExtractBody<InferInput<(typeof import('#validators/create_organisation').createOrganisationValidator)>>
       paramsTuple: []
       params: {}
-      query: {}
+      query: ExtractQuery<InferInput<(typeof import('#validators/create_organisation').createOrganisationValidator)>>
       response: ExtractResponse<Awaited<ReturnType<import('#controllers/organisations_controller').default['store']>>>
-      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/organisations_controller').default['store']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/organisations_controller').default['store']>>> | { status: 422; response: { errors: SimpleError[] } }
     }
   }
 }
