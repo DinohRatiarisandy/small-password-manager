@@ -1,0 +1,82 @@
+<script script setup lang="ts">
+import { Link, Form } from '@adonisjs/inertia/vue'
+import ThemeSwitcher from '~/components/ThemeSwitcher.vue'
+import Avatar from '~/components/Avatar.vue'
+import { watch } from 'vue'
+import { usePage } from '@inertiajs/vue3'
+import { toast } from 'vue-sonner'
+import type { Data } from '@generated/data'
+
+const page = usePage<Data.SharedProps>()
+
+watch(
+  () => page.url,
+  () => toast.dismiss()
+)
+
+watch(
+  () => page.props.flash,
+  (flashMessages) => {
+    if (flashMessages.error) {
+      toast.error(flashMessages.error)
+    }
+    if (flashMessages.success) {
+      toast.success(flashMessages.success)
+    }
+  },
+  { immediate: true }
+)
+</script>
+
+<template>
+  <header class="sticky top-0 z-50 border-b bg-base-100/80 backdrop-blur p-2">
+    <div class="flex justify-between">
+      <div class="flex items-center gap-4">
+        <Link route="home" class="flex items-center">
+          <svg
+            width="66"
+            height="24"
+            viewBox="-2 -2 184.286 85.299"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+          >
+            <g
+              id="svgGroup"
+              stroke-linecap="round"
+              fill-rule="nonzero"
+              fill="#000000"
+              stroke="#000000"
+              stroke-width="0.5"
+            >
+              <path
+                d="M49.182 45.667L49.182 45.667Q49.182 49.072 48.322 51.672Q47.461 54.272 45.905 56.177Q44.348 58.081 42.224 59.363Q40.100 60.645 37.592 61.414Q35.083 62.183 32.281 62.512Q29.480 62.842 26.587 62.842L26.587 62.842Q22.778 62.842 19.556 62.274Q16.333 61.707 13.495 60.480Q10.657 59.253 8.038 57.312Q5.420 55.371 2.820 52.588L2.820 52.588L10.291 45.007Q11.316 47.534 13.110 49.677Q14.905 51.819 17.047 53.357Q19.189 54.895 21.497 55.774Q23.804 56.653 25.854 56.653L25.854 56.653Q28.271 56.653 30.396 56.305Q32.520 55.957 34.094 55.151Q35.669 54.346 36.566 53.009Q37.463 51.672 37.463 49.658L37.463 49.658Q37.463 48.120 36.768 47.021Q36.072 45.923 34.955 45.135Q33.838 44.348 32.410 43.799Q30.981 43.250 29.498 42.865Q28.015 42.480 26.587 42.169Q25.159 41.858 24.060 41.528L24.060 41.528Q21.899 40.906 19.556 40.192Q17.212 39.478 14.941 38.562Q12.671 37.646 10.638 36.456Q8.606 35.266 7.068 33.636Q5.530 32.007 4.614 29.865Q3.699 27.722 3.699 24.939L3.699 24.939Q3.699 21.606 4.523 19.025Q5.347 16.443 6.848 14.539Q8.350 12.634 10.400 11.334Q12.451 10.034 14.905 9.247Q17.358 8.459 20.123 8.112Q22.888 7.764 25.781 7.764L25.781 7.764Q29.736 7.764 32.977 8.496Q36.218 9.229 38.965 10.583Q41.711 11.938 44.000 13.824Q46.289 15.710 48.303 18.018L48.303 18.018L40.833 25.598Q39.954 22.961 38.397 20.837Q36.841 18.713 34.937 17.194Q33.032 15.674 30.945 14.850Q28.857 14.026 26.917 14.026L26.917 14.026Q24.390 14.026 22.266 14.374Q20.142 14.722 18.622 15.509Q17.102 16.296 16.260 17.633Q15.417 18.970 15.417 20.947L15.417 20.947Q15.417 22.522 16.040 23.621Q16.663 24.719 17.706 25.488Q18.750 26.257 20.068 26.752Q21.387 27.246 22.797 27.612Q24.207 27.979 25.580 28.253Q26.953 28.528 28.088 28.857L28.088 28.857Q30.286 29.480 32.703 30.176Q35.120 30.872 37.463 31.805Q39.807 32.739 41.931 33.948Q44.055 35.156 45.667 36.823Q47.278 38.489 48.230 40.668Q49.182 42.847 49.182 45.667ZM72.766 42.078L72.766 61.780L58.228 61.780L58.228 9.045L86.719 9.045Q90.417 9.045 93.805 10.034Q97.192 11.023 99.792 13.019Q102.393 15.015 103.949 18.036Q105.505 21.057 105.505 25.122L105.505 25.122Q105.505 27.686 104.773 29.938Q104.041 32.190 102.740 34.058Q101.440 35.925 99.683 37.427Q97.925 38.928 95.837 39.954Q93.750 40.979 91.425 41.528Q89.099 42.078 86.719 42.078L86.719 42.078L72.766 42.078ZM90.784 25.122L90.784 25.122Q90.784 20.032 88.202 17.120Q85.620 14.209 80.420 14.209L80.420 14.209L72.766 14.209L72.766 37.097L80.420 37.097Q83.203 37.097 85.162 36.200Q87.122 35.303 88.367 33.691Q89.612 32.080 90.198 29.901Q90.784 27.722 90.784 25.122ZM133.923 61.780L121.875 22.449L117.773 61.780L108.801 61.780L117.773 9.045L131.067 9.045L143.408 49.292L155.896 9.045L169.189 9.045L176.660 61.780L161.865 61.780L157.507 23.474L147.217 61.780L133.923 61.780Z"
+                fill="currentColor"
+              />
+            </g>
+          </svg>
+        </Link>
+        <ThemeSwitcher />
+      </div>
+      <div>
+        <nav class="flex items-center gap-3">
+          <template v-if="page.props.user">
+            <div class="flex items-center gap-2">
+              <Avatar
+                :initials="page.props.user.initials"
+                :dataTip="page.props.user.email"
+                tooltipPosition="left"
+              />
+              <Form route="session.destroy">
+                <button class="btn btn-warning" type="submit">Logout</button>
+              </Form>
+            </div>
+          </template>
+          <template v-else>
+            <Link class="link link-secondary" route="new_account.create">Signup</Link>
+            <Link class="link link-info" route="session.create">Login</Link>
+          </template>
+        </nav>
+      </div>
+    </div>
+  </header>
+</template>
